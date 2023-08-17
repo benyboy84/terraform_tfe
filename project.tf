@@ -5,5 +5,5 @@ data "tfe_organization" "ConseilsTI" {
 
 resource "tfe_project" "test" {
   organization = data.tfe_organization.ConseilsTI.name
-  name = "projectname"
+  name         = "projectname"
 }
