@@ -1,0 +1,3 @@
+provider "tfe" {
+  # Configuration options
+}
