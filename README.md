@@ -13,7 +13,13 @@ The following requirements are needed by this module:
 
 ## Modules
 
-No modules.
+The following Modules are called:
+
+### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
+
+Source: ./modules/workspaces
+
+Version:
 
 ## Required Inputs
 
@@ -27,8 +33,8 @@ No optional inputs.
 
 The following resources are used by this module:
 
-- [tfe_project.test](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/project) (resource)
-- [tfe_organization.ConseilsTI](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/organization) (data source)
+- [tfe_project.project](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/project) (resource)
+- [tfe_organization.conseilsti](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/organization) (data source)
 
 ## Outputs
 
