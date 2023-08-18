@@ -16,7 +16,7 @@ locals {
       }
     }
     "Terraform Cloud" = {
-        workspaces = {}
+      workspaces = {}
     }
   }
 }
