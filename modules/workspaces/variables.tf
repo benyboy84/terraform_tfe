@@ -142,7 +142,7 @@ variable "working_directory" {
 variable "vcs_repo" {
   description = <<DESCRIPTION
   (Optional) (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.
-    identifier                 = (Required) A reference to your VCS repository in the format <vcs organization>/<repository> where <vcs organization> and <repository> refer to the organization and repository in your VCS provider. The format for Azure DevOps is <ado organization>/<ado project>/_git/<ado repository>.
+    identifier                 = (Required) A reference to your VCS repository in the format <vcs organization>/<repository> where <vcs organization> and <repository> refer to the organization and repository in your VCS provider.
     branch                     = (Optional) The repository branch that Terraform will execute from. This defaults to the repository's default branch (e.g. main).
     ingress_submodules         = (Optional) Whether submodules should be fetched when cloning the VCS repository.
     oauth_token_id             = (Optional) The VCS Connection (OAuth Connection + Token) to use. This ID can be obtained from a tfe_oauth_client resource. This conflicts with github_app_installation_id and can only be used if github_app_installation_id is not used.
@@ -151,16 +151,16 @@ variable "vcs_repo" {
   DESCRIPTION
   type = object({
     identifier                 = string
-    branch                     = optional(string)
+    branch                     = optional(string, null)
     ingress_submodules         = optional(bool, false)
-    oauth_token_id             = optional(string)
-    github_app_installation_id = optional()
-    tags_regex                 = optional()
+    oauth_token_id             = optional(string, null)
+    github_app_installation_id = optional(string, null)
+    tags_regex                 = optional(string, null)
   })
   default = null
 
   validation {
-    condition     = contains(["remote", "local", "agent"], var.execution_mode)
-    error_message = "Valid values are `remote`, `local` or `agent`."
+    condition     = var.vcs_repo != null ? var.vcs_repo.oauth_token_id != null && var.vcs_repo.github_app_installation_id != null ? false : true : true
+    error_message = "`oauth_token_id` conflicts with `github_app_installation_id`."
   }
 }

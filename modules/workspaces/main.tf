@@ -24,6 +24,20 @@ resource "tfe_workspace" "this" {
   trigger_patterns              = var.trigger_patterns
   working_directory             = var.working_directory
 
+  dynamic "vcs_repo" {
+    for_each = var.vcs_repo == null ? [] : [
+      "vcs_repo"
+    ]
+    content {
+      identifier                 = var.vcs_repo.identifier
+      branch                     = var.vcs_repo.branch
+      ingress_submodules         = var.vcs_repo.ingress_submodules
+      oauth_token_id             = var.vcs_repo.oauth_token_id
+      github_app_installation_id = var.vcs_repo.github_app_installation_id
+      tags_regex                 = var.vcs_repo.tags_regex
+    }
+  }
+
   lifecycle {
     ignore_changes = [source_url]
 
