@@ -121,7 +121,7 @@ Description: (Optional) Whether to filter runs based on the changed files in a V
 
 Type: `bool`
 
-Default: `true`
+Default: `false`
 
 ### <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state)
 

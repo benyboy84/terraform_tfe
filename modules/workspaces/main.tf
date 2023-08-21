@@ -25,9 +25,7 @@ resource "tfe_workspace" "this" {
   working_directory             = var.working_directory
 
   dynamic "vcs_repo" {
-    for_each = var.vcs_repo == null ? [] : [
-      "vcs_repo"
-    ]
+    for_each = var.vcs_repo != null ? [true] : []
     content {
       identifier                 = var.vcs_repo.identifier
       branch                     = var.vcs_repo.branch

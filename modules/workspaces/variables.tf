@@ -38,7 +38,7 @@ variable "execution_mode" {
   default     = "remote"
 
   validation {
-    condition     = contains(["remote", "local", "agent"], var.execution_mode)
+    condition     = var.execution_mode != null ? contains(["remote", "local", "agent"], var.execution_mode) ? true : false : true
     error_message = "Valid values are `remote`, `local` or `agent`."
   }
 }
@@ -52,7 +52,7 @@ variable "assessments_enabled" {
 variable "file_triggers_enabled" {
   description = "(Optional) Whether to filter runs based on the changed files in a VCS push. If enabled, the working directory and trigger prefixes describe a set of paths which must contain changes for a VCS push to trigger a run. If disabled, any push will trigger a run."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "global_remote_state" {
