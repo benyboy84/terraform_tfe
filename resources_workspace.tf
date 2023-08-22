@@ -6,7 +6,7 @@ module "workspaces" {
   for_each = local.workspaces
 
   name         = each.key
-  organization = data.tfe_organization.conseilsti.name
+  organization = data.tfe_organization.this.name
   project_id   = tfe_project.project["${each.value.project}"].id
 
   description                   = try(each.value.description, null)

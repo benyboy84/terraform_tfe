@@ -3,6 +3,6 @@
 resource "tfe_project" "project" {
   for_each = local.projects
 
-  organization = data.tfe_organization.conseilsti.name
+  organization = data.tfe_organization.this.name
   name         = each.key
 }
