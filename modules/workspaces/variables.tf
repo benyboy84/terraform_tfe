@@ -15,7 +15,7 @@ variable "description" {
 }
 
 variable "agent_pool_id" {
-  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires execution_mode to be set to agent. This value must not be provided if execution_mode is set to any other value or if operations is provided."
+  description = "(Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value or if `operations` is provided."
   type        = string
   default     = null
 }
@@ -56,7 +56,7 @@ variable "file_triggers_enabled" {
 }
 
 variable "global_remote_state" {
-  description = "(Optional) Whether the workspace allows all workspaces in the organization to access its state data during runs. If `false`, then only specifically approved workspaces can access its state (remote_state_consumer_ids)."
+  description = "(Optional) Whether the workspace allows all workspaces in the organization to access its state data during runs. If false, then only specifically approved workspaces can access its state (`remote_state_consumer_ids`)."
   type        = bool
   default     = false
 }
@@ -80,13 +80,13 @@ variable "queue_all_runs" {
 }
 
 variable "source_name" {
-  description = "(Optional) A friendly name for the application or client creating this workspace. If set, this will be displayed on the workspace as 'Created via '. Requires source_url to also be set."
+  description = "(Optional) A friendly name for the application or client creating this workspace. If set, this will be displayed on the workspace as 'Created via '. Requires `source_url` to also be set."
   type        = string
   default     = null
 }
 
 variable "source_url" {
-  description = "(Optional) A URL for the application or client creating this workspace. This can be the URL of a related resource in another app, or a link to documentation or other info about the client. Requires source_name to also be set. Note: The API does not (currently) allow this to be updated after a workspace has been created, so modifying this value will result in the workspace being replaced. To disable this, use an ignore changes lifecycle meta-argument"
+  description = "(Optional) A URL for the application or client creating this workspace. This can be the URL of a related resource in another app, or a link to documentation or other info about the client. Requires `source_name` to also be set. Note: The API does not (currently) allow this to be updated after a workspace has been created, so modifying this value will result in the workspace being replaced. To disable this, use an ignore changes lifecycle meta-argument"
   type        = string
   default     = null
 }
@@ -116,7 +116,7 @@ variable "tag_names" {
 }
 
 variable "terraform_version" {
-  description = "(Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> 1.0.0); if you specify a constraint, the workspace will always use the newest release that meets that constraint."
+  description = "(Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> `1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint."
   type        = string
   default     = null
 }
@@ -128,7 +128,7 @@ variable "trigger_prefixes" {
 }
 
 variable "trigger_patterns" {
-  description = "(Optional) List of glob patterns that describe the files Terraform Cloud monitors for changes. Trigger patterns are always appended to the root directory of the repository. Mutually exclusive with trigger-prefixes."
+  description = "(Optional) List of glob patterns that describe the files Terraform Cloud monitors for changes. Trigger patterns are always appended to the root directory of the repository. Mutually exclusive with `trigger-prefixes`."
   type        = list(string)
   default     = null
 }
@@ -141,13 +141,13 @@ variable "working_directory" {
 
 variable "vcs_repo" {
   description = <<DESCRIPTION
-  (Optional) (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.
-    identifier                 = (Required) A reference to your VCS repository in the format <vcs organization>/<repository> where <vcs organization> and <repository> refer to the organization and repository in your VCS provider.
+  (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.
+    identifier                 = (Required) A reference to your VCS repository in the format '<vcs organization>/<repository>' where '<vcs organization>' and '<repository>' refer to the organization and repository in your VCS provider. The format for Azure DevOps is '<ado organization>/<ado project>/_git/<ado repository>'.
     branch                     = (Optional) The repository branch that Terraform will execute from. This defaults to the repository's default branch (e.g. main).
     ingress_submodules         = (Optional) Whether submodules should be fetched when cloning the VCS repository.
-    oauth_token_id             = (Optional) The VCS Connection (OAuth Connection + Token) to use. This ID can be obtained from a tfe_oauth_client resource. This conflicts with github_app_installation_id and can only be used if github_app_installation_id is not used.
-    github_app_installation_id = (Optional) The installation id of the Github App. This conflicts with oauth_token_id and can only be used if oauth_token_id is not used.
-    tags_regex                 = (Optional) A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with trigger_patterns and trigger_prefixes. Should only set this value if the former is not being used.
+    oauth_token_id             = (Optional) The VCS Connection (OAuth Connection + Token) to use. This ID can be obtained from a 'tfe_oauth_client' resource. This conflicts with 'github_app_installation_id' and can only be used if 'github_app_installation_id' is not used.
+    github_app_installation_id = (Optional) The installation id of the Github App. This conflicts with 'oauth_token_id' and can only be used if 'oauth_token_id' is not used.
+    tags_regex                 = (Optional) A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with 'trigger_patterns' and 'trigger_prefixes'. Should only set this value if the former is not being used.
   DESCRIPTION
   type = object({
     identifier                 = string

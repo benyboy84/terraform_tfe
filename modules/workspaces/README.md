@@ -69,7 +69,7 @@ The following input variables are optional (have default values):
 
 ### <a name="input_agent_pool_id"></a> [agent\_pool\_id](#input\_agent\_pool\_id)
 
-Description: (Optional) The ID of an agent pool to assign to the workspace. Requires execution\_mode to be set to agent. This value must not be provided if execution\_mode is set to any other value or if operations is provided.
+Description: (Optional) The ID of an agent pool to assign to the workspace. Requires `execution_mode` to be set to `agent`. This value must not be provided if `execution_mode` is set to any other value or if `operations` is provided.
 
 Type: `string`
 
@@ -125,7 +125,7 @@ Default: `false`
 
 ### <a name="input_global_remote_state"></a> [global\_remote\_state](#input\_global\_remote\_state)
 
-Description: (Optional) Whether the workspace allows all workspaces in the organization to access its state data during runs. If `false`, then only specifically approved workspaces can access its state (remote\_state\_consumer\_ids).
+Description: (Optional) Whether the workspace allows all workspaces in the organization to access its state data during runs. If false, then only specifically approved workspaces can access its state (`remote_state_consumer_ids`).
 
 Type: `bool`
 
@@ -157,7 +157,7 @@ Default: `[]`
 
 ### <a name="input_source_name"></a> [source\_name](#input\_source\_name)
 
-Description: (Optional) A friendly name for the application or client creating this workspace. If set, this will be displayed on the workspace as 'Created via '. Requires source\_url to also be set.
+Description: (Optional) A friendly name for the application or client creating this workspace. If set, this will be displayed on the workspace as 'Created via '. Requires `source_url` to also be set.
 
 Type: `string`
 
@@ -165,7 +165,7 @@ Default: `null`
 
 ### <a name="input_source_url"></a> [source\_url](#input\_source\_url)
 
-Description: (Optional) A URL for the application or client creating this workspace. This can be the URL of a related resource in another app, or a link to documentation or other info about the client. Requires source\_name to also be set. Note: The API does not (currently) allow this to be updated after a workspace has been created, so modifying this value will result in the workspace being replaced. To disable this, use an ignore changes lifecycle meta-argument
+Description: (Optional) A URL for the application or client creating this workspace. This can be the URL of a related resource in another app, or a link to documentation or other info about the client. Requires `source_name` to also be set. Note: The API does not (currently) allow this to be updated after a workspace has been created, so modifying this value will result in the workspace being replaced. To disable this, use an ignore changes lifecycle meta-argument
 
 Type: `string`
 
@@ -205,7 +205,7 @@ Default: `[]`
 
 ### <a name="input_terraform_version"></a> [terraform\_version](#input\_terraform\_version)
 
-Description: (Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> 1.0.0); if you specify a constraint, the workspace will always use the newest release that meets that constraint.
+Description: (Optional) The version of Terraform to use for this workspace. This can be either an exact version or a version constraint (like ~> `1.0.0`); if you specify a constraint, the workspace will always use the newest release that meets that constraint.
 
 Type: `string`
 
@@ -213,7 +213,7 @@ Default: `null`
 
 ### <a name="input_trigger_patterns"></a> [trigger\_patterns](#input\_trigger\_patterns)
 
-Description: (Optional) List of glob patterns that describe the files Terraform Cloud monitors for changes. Trigger patterns are always appended to the root directory of the repository. Mutually exclusive with trigger-prefixes.
+Description: (Optional) List of glob patterns that describe the files Terraform Cloud monitors for changes. Trigger patterns are always appended to the root directory of the repository. Mutually exclusive with `trigger-prefixes`.
 
 Type: `list(string)`
 
@@ -229,24 +229,24 @@ Default: `null`
 
 ### <a name="input_vcs_repo"></a> [vcs\_repo](#input\_vcs\_repo)
 
-Description:   (Optional) (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.  
-    identifier                 = (Required) A reference to your VCS repository in the format <vcs organization>/<repository> where <vcs organization> and <repository> refer to the organization and repository in your VCS provider.  
+Description:   (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.  
+    identifier                 = (Required) A reference to your VCS repository in the format '<vcs organization>/<repository>' where '<vcs organization>' and '<repository>' refer to the organization and repository in your VCS provider. The format for Azure DevOps is '<ado organization>/<ado project>/\_git/<ado repository>'.  
     branch                     = (Optional) The repository branch that Terraform will execute from. This defaults to the repository's default branch (e.g. main).  
     ingress\_submodules         = (Optional) Whether submodules should be fetched when cloning the VCS repository.  
-    oauth\_token\_id             = (Optional) The VCS Connection (OAuth Connection + Token) to use. This ID can be obtained from a tfe\_oauth\_client resource. This conflicts with github\_app\_installation\_id and can only be used if github\_app\_installation\_id is not used.  
-    github\_app\_installation\_id = (Optional) The installation id of the Github App. This conflicts with oauth\_token\_id and can only be used if oauth\_token\_id is not used.  
-    tags\_regex                 = (Optional) A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with trigger\_patterns and trigger\_prefixes. Should only set this value if the former is not being used.
+    oauth\_token\_id             = (Optional) The VCS Connection (OAuth Connection + Token) to use. This ID can be obtained from a 'tfe\_oauth\_client' resource. This conflicts with 'github\_app\_installation\_id' and can only be used if 'github\_app\_installation\_id' is not used.  
+    github\_app\_installation\_id = (Optional) The installation id of the Github App. This conflicts with 'oauth\_token\_id' and can only be used if 'oauth\_token\_id' is not used.  
+    tags\_regex                 = (Optional) A regular expression used to trigger a Workspace run for matching Git tags. This option conflicts with 'trigger\_patterns' and 'trigger\_prefixes'. Should only set this value if the former is not being used.
 
 Type:
 
 ```hcl
 object({
     identifier                 = string
-    branch                     = optional(string,null)
+    branch                     = optional(string, null)
     ingress_submodules         = optional(bool, false)
-    oauth_token_id             = optional(string,null)
-    github_app_installation_id = optional(string,null)
-    tags_regex                 = optional(string,null)
+    oauth_token_id             = optional(string, null)
+    github_app_installation_id = optional(string, null)
+    tags_regex                 = optional(string, null)
   })
 ```
 
@@ -262,5 +262,17 @@ Default: `null`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_"></a> [](#output\_)
+
+Description: Terraform Cloud workspace resource.
+
+### <a name="output_id"></a> [id](#output\_id)
+
+Description: The workspace ID.
+
+### <a name="output_resource_count"></a> [resource\_count](#output\_resource\_count)
+
+Description: The number of resources managed by the workspace.
 <!-- END_TF_DOCS -->
