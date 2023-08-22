@@ -5,6 +5,24 @@ your Terraform Cloud workspaces. It is designed to be used from a dedicated
 Terraform Cloud workspace that would provision and manage rest of your
 workspaces using Terraform code (IaC).
 
+## Permissions
+
+To manage the workspace resources, provide a user token from an account with 
+appropriate permissions. This user should belong to the "owners" team of every 
+organization you wish to manage. Alternatively, you can use an organization or team token instead of a user token, but it will limit which resources you can manage. Organization and team tokens cannot manage resources across multiple organizations, and organization tokens cannot manage certain resource types (like SSH keys).
+
+## Authentication
+
+The Terraform Cloud provider requires a Terraform Cloud/Enterprise API token in 
+order to manage resources.
+
+There are several ways to provide the required token:
+
+- Set the `token` argument in the provider configuration. You can set the token argument in the provider configuration. Use an
+input variable for the token.
+- Set the `TFE_TOKEN` environment variable: The provider can read the TFE_TOKEN environment variable and the token stored there
+to authenticate.
+
 ## Features
 
 - Create a Terraform Cloud workspace
@@ -264,9 +282,9 @@ Default: `null`
 
 The following outputs are exported:
 
-### <a name="output_"></a> [](#output\_)
+### <a name="output_html_url"></a> [html\_url](#output\_html\_url)
 
-Description: Terraform Cloud workspace resource.
+Description: The URL to the browsable HTML overview of the workspace.
 
 ### <a name="output_id"></a> [id](#output\_id)
 
@@ -275,4 +293,8 @@ Description: The workspace ID.
 ### <a name="output_resource_count"></a> [resource\_count](#output\_resource\_count)
 
 Description: The number of resources managed by the workspace.
+
+### <a name="output_workspace"></a> [workspace](#output\_workspace)
+
+Description: Terraform Cloud workspace resource.
 <!-- END_TF_DOCS -->

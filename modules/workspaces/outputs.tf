@@ -8,12 +8,12 @@ output "resource_count" {
     value       = tfe_workspace.this.resource_count
 }
 
-output "" {
+output "html_url" {
     description = "The URL to the browsable HTML overview of the workspace."
     value       = tfe_workspace.this.html_url
 }
 
-output "" {
+output "workspace" {
     description = "Terraform Cloud workspace resource."
     value       = tfe_workspace.this
 }
