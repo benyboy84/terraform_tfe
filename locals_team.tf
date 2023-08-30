@@ -4,7 +4,7 @@ locals {
   project_teams_array = flatten([for projects, project in local.projects :
     flatten([for teams, team in project.teams :
       merge(
-        workspace,
+        team,
         { name = teams
         project = projects }
       )
