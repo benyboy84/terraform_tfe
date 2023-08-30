@@ -8,6 +8,7 @@ locals {
         { project = projects }
       )
     ])
+    if try(project.workspaces, null) != null
   ])
   workspaces = { for row in local.workspaces_array : row.name => row }
 }

@@ -10,7 +10,7 @@ module "modules" {
   organization    = try(each.value.organization, null)
   namespace       = try(each.value.namespace, null)
   registry_name   = try(each.value.registry_name, null)
-  vcs_repo        = try(each.value.vcs_repo,null)
+  vcs_repo        = try(each.value.vcs_repo, null)
 
 }
 

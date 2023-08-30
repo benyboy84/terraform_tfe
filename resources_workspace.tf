@@ -28,7 +28,7 @@ module "workspaces" {
   terraform_version             = try(each.value.terraform_version, null)
   trigger_prefixes              = try(each.value.trigger_prefixes, null)
   trigger_patterns              = try(each.value.trigger_patterns, null)
-  vcs_repo                      = try(each.value.vcs_repo,null)
+  vcs_repo                      = try(each.value.vcs_repo, null)
   working_directory             = try(each.value.working_directory, null)
 
 }

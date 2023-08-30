@@ -1,31 +1,31 @@
 variable "module_provider" {
-    description = "(Optional) Specifies the Terraform provider that this module is used for. For example, 'aws'."
-    type        = string
-    default     = null
+  description = "(Optional) Specifies the Terraform provider that this module is used for. For example, 'aws'."
+  type        = string
+  default     = null
 }
 
 variable "name" {
-    description = "(Optional) The name of registry module. It must be set if `module_provider` is used."
-    type        = string
-    default     = null
+  description = "(Optional) The name of registry module. It must be set if `module_provider` is used."
+  type        = string
+  default     = null
 }
 
 variable "organization" {
-    description = "(Optional) The name of the organization associated with the registry module. It must be set if `module_provider` is used, or if `vcs_repo` is used via a GitHub App."
-    type        = string
-    default     = null
+  description = "(Optional) The name of the organization associated with the registry module. It must be set if `module_provider` is used, or if `vcs_repo` is used via a GitHub App."
+  type        = string
+  default     = null
 }
 
 variable "namespace" {
-    description = "(Optional) The namespace of a public registry module. It can be used if `module_provider` is set and `registry_name` is public."
-    type        = string
-    default     = null
+  description = "(Optional) The namespace of a public registry module. It can be used if `module_provider` is set and `registry_name` is public."
+  type        = string
+  default     = null
 }
 
 variable "registry_name" {
-    description = "(Optional) Whether the registry module is private or public. It can be used if `module_provider` is set."
-    type        = string
-    default     = null
+  description = "(Optional) Whether the registry module is private or public. It can be used if `module_provider` is set."
+  type        = string
+  default     = null
 }
 
 variable "vcs_repo" {
