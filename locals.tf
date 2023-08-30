@@ -28,4 +28,15 @@ locals {
       workspaces = {}
     }
   }
+
+  # A list of all private modules to import into Terraform Cloud private module registry.
+  modules = {
+    # "terraform-azurerm-key_vault" = {
+    #   vcs_repo = {
+    #     display_identifier = "benyboy84/terraform-azurerm-key_vault"
+    #     identifier         = "benyboy84/terraform-azurerm-key_vault"
+    #     oauth_token_id     = data.tfe_oauth_client.client.oauth_token_id
+    #   }
+    # }
+  }
 }

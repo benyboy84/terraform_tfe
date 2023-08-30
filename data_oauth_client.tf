@@ -1,4 +1,4 @@
 data "tfe_oauth_client" "client" {
-  organization = "ConseilsTI"
+  organization = data.tfe_organization.this.name
   name         = "GitHub.com"
 }
