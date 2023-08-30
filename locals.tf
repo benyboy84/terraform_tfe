@@ -37,4 +37,30 @@ locals {
     #   }
     # }
   }
+
+  teams = {
+    "org_admin" = {
+      organization_access = {
+        manage_projects         = true
+        manage_workspaces       = true
+        manage_policies         = true
+        manage_policy_overrides = true
+        manage_run_tasks        = true
+        manage_vcs_settings     = true
+        manage_membership       = true
+        manage_modules          = true
+        manage_providers        = true
+      }
+    },
+    "org_private-registry" = {
+      organization_access = {
+        manage_modules          = true
+      }
+    },
+    "org_membership" = {
+      organization_access = {
+        manage_membership       = true
+      }
+    }
+  }
 }
