@@ -51,6 +51,12 @@ Source: ./modules/teams
 
 Version:
 
+### <a name="module_teams"></a> [teams](#module\_teams)
+
+Source: ./modules/teams
+
+Version:
+
 ### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
 
 Source: ./modules/workspaces
