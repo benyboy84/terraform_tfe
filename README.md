@@ -15,6 +15,12 @@ The following requirements are needed by this module:
 
 The following Modules are called:
 
+### <a name="module_modules"></a> [modules](#module\_modules)
+
+Source: ./modules/modules
+
+Version:
+
 ### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
 
 Source: ./modules/workspaces
