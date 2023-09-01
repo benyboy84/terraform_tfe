@@ -29,8 +29,8 @@ to authenticate.
 
 ## Usage example
 ```hcl
-module "modules" {
-  source = "./modules/modules"
+module "module" {
+  source = "./modules/module"
 
   vcs_repo = {
     display_identifier = "orgs/pepo"
