@@ -80,10 +80,10 @@ variable "project_id" {
 variable "project_access" {
   description = "(Optional) Type of fixed access to grant. Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
   type        = string
-  default     = null
+  default     = "read"
 
   validation {
-    condition     = var.project_access != null ? contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false : true
+    condition     = contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false : true
     error_message = "Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
   }
 }

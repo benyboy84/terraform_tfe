@@ -25,7 +25,7 @@ resource "tfe_team" "this" {
 
 resource "tfe_team_project_access" "this" {
 
-  count = var.project_access != null ? 1 : 0
+  count = var.project_id != null ? 1 : 0
 
   team_id    = tfe_team.this.id
   project_id = var.project_id
