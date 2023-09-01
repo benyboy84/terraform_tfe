@@ -22,3 +22,36 @@ resource "tfe_team" "this" {
     }
   }
 }
+
+resource "tfe_team_project_access" "this" {
+
+  count = var.project_access != null ? 1 : 0
+
+  team_id    = tfe_team.this.id
+  project_id = var.project_id
+  access     = var.project_access
+
+  dynamic "project_access" {
+    for_each = var.custom_project_access != null ? [true] : []
+    content {
+      settings = var.project_access.settings
+      teams    = var.project_access.teams
+    }
+  }
+
+  dynamic "workspace_access" {
+    for_each = var.custom_workspace_access != null ? [true] : []
+    content {
+      runs           = var.workspace_access.runs
+      sentinel_mocks = var.workspace_access.sentinel_mocks
+      state_versions = var.workspace_access.state_versions
+      variables      = var.workspace_access.variables
+      create         = var.workspace_access.create
+      locking        = var.workspace_access.locking
+      delete         = var.workspace_access.delete
+      move           = var.workspace_access.move
+      run_tasks      = var.workspace_access.run_tasks
+    }
+  }
+
+}
