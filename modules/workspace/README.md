@@ -30,8 +30,8 @@ to authenticate.
 
 ## Usage example
 ```hcl
-module "workspaces" {
-  source = "./modules/workspaces"
+module "workspace" {
+  source = "./modules/workspace"
 
   name         = "Workspace Nane"
   organization = "Organization Name"
