@@ -21,39 +21,15 @@ Source: ./modules/modules
 
 Version:
 
-### <a name="module_project_teams_admin"></a> [project\_teams\_admin](#module\_project\_teams\_admin)
+### <a name="module_project_teams"></a> [project\_teams](#module\_project\_teams)
 
-Source: ./modules/teams
-
-Version:
-
-### <a name="module_project_teams_custom"></a> [project\_teams\_custom](#module\_project\_teams\_custom)
-
-Source: ./modules/teams
-
-Version:
-
-### <a name="module_project_teams_maintain"></a> [project\_teams\_maintain](#module\_project\_teams\_maintain)
-
-Source: ./modules/teams
-
-Version:
-
-### <a name="module_project_teams_read"></a> [project\_teams\_read](#module\_project\_teams\_read)
-
-Source: ./modules/teams
-
-Version:
-
-### <a name="module_project_teams_write"></a> [project\_teams\_write](#module\_project\_teams\_write)
-
-Source: ./modules/teams
+Source: ./modules/team
 
 Version:
 
 ### <a name="module_teams"></a> [teams](#module\_teams)
 
-Source: ./modules/teams
+Source: ./modules/team
 
 Version:
 
