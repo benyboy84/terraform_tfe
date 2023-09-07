@@ -27,7 +27,7 @@ to authenticate.
 
 - Create team
 - configure organization access
-- Assign team to project and configure acces
+- Assign team to project and configure access
 
 ## Usage example
 ```hcl
@@ -177,7 +177,7 @@ Description: (Optional) Type of fixed access to grant. Valid values are `admin`,
 
 Type: `string`
 
-Default: `null`
+Default: `"read"`
 
 ### <a name="input_project_id"></a> [project\_id](#input\_project\_id)
 

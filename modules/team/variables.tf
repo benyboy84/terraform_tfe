@@ -83,7 +83,7 @@ variable "project_access" {
   default     = "read"
 
   validation {
-    condition     = contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false : true
+    condition     = contains(["admin", "maintain", "write", "read", "custom"], var.project_access) ? true : false
     error_message = "Valid values are `admin`, `maintain`, `write`, `read`, or `custom`."
   }
 }

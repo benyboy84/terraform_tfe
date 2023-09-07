@@ -10,10 +10,10 @@ output "team" {
 
 output "team_project_access_id" {
   description = "The team project access ID."
-  value       = var.project_access != null ? tfe_team_project_access.this[0].id : null
+  value       = var.project_id != null ? tfe_team_project_access.this[0].id : null
 }
 
 output "team_project_access" {
   description = "Terraform Cloud team project access resource"
-  value       = var.project_access != null ? tfe_team_project_access.this[0] : null
+  value       = var.project_id != null ? tfe_team_project_access.this[0] : null
 }
