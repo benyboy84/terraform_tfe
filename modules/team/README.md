@@ -25,9 +25,10 @@ to authenticate.
 
 ## Features
 
-- Create team
-- configure organization access
-- Assign team to project and configure access
+- Create teams.
+- Set team's organization access.
+- Associate a team to permissions on a project.
+- Generates a new team token and overrides existing token if one exists.
 
 ## Usage example
 ```hcl
@@ -42,6 +43,7 @@ module "team" {
   project_id     = "Project_Id"
   project_access = "write"
 
+  token = true
 }
 ```
 
@@ -68,6 +70,7 @@ The following resources are used by this module:
 
 - [tfe_team.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team) (resource)
 - [tfe_team_project_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_project_access) (resource)
+- [tfe_team_token.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_token) (resource)
 
 ## Required Inputs
 
@@ -195,6 +198,30 @@ Type: `string`
 
 Default: `null`
 
+### <a name="input_token"></a> [token](#input\_token)
+
+Description: (Optional) If set to `true`, a team token will be generated.
+
+Type: `bool`
+
+Default: `false`
+
+### <a name="input_token_expired_at"></a> [token\_expired\_at](#input\_token\_expired\_at)
+
+Description: (Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_token_force_regenerate"></a> [token\_force\_regenerate](#input\_token\_force\_regenerate)
+
+Description: (Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!
+
+Type: `bool`
+
+Default: `false`
+
 ### <a name="input_visibility"></a> [visibility](#input\_visibility)
 
 Description: (Optional) The visibility of the team (`secret` or `organization`).
@@ -222,4 +249,12 @@ Description: Terraform Cloud team project access resource
 ### <a name="output_team_project_access_id"></a> [team\_project\_access\_id](#output\_team\_project\_access\_id)
 
 Description: The team project access ID.
+
+### <a name="output_token"></a> [token](#output\_token)
+
+Description: The generated token.
+
+### <a name="output_token_id"></a> [token\_id](#output\_token\_id)
+
+Description: The ID of the token.
 <!-- END_TF_DOCS -->

@@ -156,3 +156,26 @@ variable "custom_workspace_access" {
     error_message = "Valid strings: `none`, `read`, or `write`."
   }
 }
+
+variable "token" {
+  description = "(Optional) If set to `true`, a team token will be generated."
+  type        = bool
+  default     = false
+}
+
+variable "token_force_regenerate" {
+  description = "(Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!"
+  type        = bool
+  default     = false
+}
+
+variable "token_expired_at" {
+  description = "(Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.token_expired_at != null ? length(regexall("^((?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}))Z)$", var.token_expired_at)) > 0 ? true : false : true
+    error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
+  }
+}

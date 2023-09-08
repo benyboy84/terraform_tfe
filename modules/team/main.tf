@@ -55,3 +55,12 @@ resource "tfe_team_project_access" "this" {
   }
 
 }
+
+resource "tfe_team_token" "this" {
+  count = var.token ? 1 : 0
+
+  team_id          = tfe_team.this.id
+  force_regenerate = var.token_force_regenerate
+  expired_at       = var.token_expired_at
+
+}
