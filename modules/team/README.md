@@ -29,21 +29,19 @@ to authenticate.
 - Set team's organization access.
 - Associate a team to permissions on a project.
 - Generates a new team token and overrides existing token if one exists.
+- Add or remove one or more team members.
 
 ## Usage example
 ```hcl
 module "team" {
   source = "./modules/team"
 
-  name         = "Team Name"
-  organization = "Organization Name"
-
-  visibility = "secret"
-  
+  name           = "Team Name"
+  organization   = "Organization Name"
+  members        = ["user@company.com"]
   project_id     = "Project_Id"
   project_access = "write"
-
-  token = true
+  token          = true
 }
 ```
 
@@ -69,8 +67,10 @@ No modules.
 The following resources are used by this module:
 
 - [tfe_team.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team) (resource)
+- [tfe_team_organization_members.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_organization_members) (resource)
 - [tfe_team_project_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_project_access) (resource)
 - [tfe_team_token.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_token) (resource)
+- [tfe_organization_membership.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/organization_membership) (data source)
 
 ## Required Inputs
 
@@ -138,6 +138,14 @@ object({
 ```
 
 Default: `null`
+
+### <a name="input_members"></a> [members](#input\_members)
+
+Description: (Optional) Email of the organization's members to be added.
+
+Type: `list(string)`
+
+Default: `[]`
 
 ### <a name="input_organization_access"></a> [organization\_access](#input\_organization\_access)
 

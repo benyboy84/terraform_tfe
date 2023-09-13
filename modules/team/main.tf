@@ -64,3 +64,17 @@ resource "tfe_team_token" "this" {
   expired_at       = var.token_expired_at
 
 }
+
+data "tfe_organization_membership" "this" {
+  for_each     = var.members != null ? toset(var.members) : []
+  organization = var.organization
+  email        = each.key
+}
+
+resource "tfe_team_organization_members" "this" {
+  count   = var.members != null ? 1 : 0
+  team_id = tfe_team.this.id
+  organization_membership_ids = [
+    for member in var.members : data.tfe_organization_membership.this[member].id
+  ]
+}

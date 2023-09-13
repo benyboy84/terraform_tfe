@@ -179,3 +179,9 @@ variable "token_expired_at" {
     error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
   }
 }
+
+variable "members" {
+  description = "(Optional) Email of the organization's members to be added."
+  type        = list(string)
+  default     = []
+}
