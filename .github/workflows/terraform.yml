@@ -86,7 +86,7 @@ jobs:
           git config user.name "GitHub Action"
           git config user.email "notifications@github.com"
           git commit -a -m "Automated Terraform Formatting"
-          git push origin HEAD:${{ GITHUB.REF_NAME }}
+          git push origin HEAD:${{ GITHUB_HEAD_REF }}
           echo "Terraform file(s) has been formatted and pushed to the repository."
 
       - name: Terraform Validate
