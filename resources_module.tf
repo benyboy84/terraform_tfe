@@ -1,7 +1,7 @@
 # The following code block is used to create module resources in the private registry.
 
 module "modules" {
-  source = "./modules/modules"
+  source = "./modules/module"
 
   for_each = local.modules
 

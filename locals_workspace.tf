@@ -5,8 +5,8 @@ locals {
     flatten([for workspaces, workspace in project.workspaces :
       merge(
         workspace,
-        { name    = workspaces
-          project = projects }
+        { name = workspaces
+        project = projects }
       )
     ])
     if try(project.workspaces, null) != null

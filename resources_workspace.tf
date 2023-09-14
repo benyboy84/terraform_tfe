@@ -1,7 +1,7 @@
 # The following code block is used to create workspace resources in project.
 
 module "workspaces" {
-  source = "./modules/workspaces"
+  source = "./modules/workspace"
 
   for_each = local.workspaces
 

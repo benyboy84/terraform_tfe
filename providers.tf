@@ -1,3 +1,1 @@
-provider "tfe" {
-
-}
+provider "tfe" {}
