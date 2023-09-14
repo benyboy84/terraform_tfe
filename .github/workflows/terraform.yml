@@ -77,6 +77,9 @@ jobs:
           recursive: true
           comment: true
 
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+
       - name: Git Push
         if: ${{ steps.fmt.outputs.exitcode == 3 }}
         env: 
