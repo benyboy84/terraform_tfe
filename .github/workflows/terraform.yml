@@ -78,7 +78,11 @@ jobs:
           comment: true
 
       - name: Branch name
-        run: echo running on branch ${GITHUB_HEAD_REF}
+        run: |
+          echo GITHUB_HEAD_REF ${GITHUB_HEAD_REF}
+          echo GITHUB_BASE_REF: ${GITHUB_BASE_REF}
+          echo GITHUB_REF: ${GITHUB_REF}
+          echo GITHUB_REF_NAME: ${GITHUB_REF_NAME}
 
       - name: Git Push
         if: ${{ steps.fmt.outputs.exitcode == 3 }}
