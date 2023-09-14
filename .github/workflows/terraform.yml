@@ -73,8 +73,9 @@ jobs:
         id: fmt
         uses: benyboy84/GitHubAction_terraform-fmt@v1
         with:
-          Recursive: true
-          Comment: true
+          check: false
+          recursive: true
+          comment: true
 
       - name: Terraform Validate
         id: validate
