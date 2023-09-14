@@ -77,6 +77,18 @@ jobs:
           recursive: true
           comment: true
 
+      - name: Git Push
+        if: ${{ steps.fmt.outputs.exitcode == 3 }}
+        env: 
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "notifications@github.com"
+          git add .
+          git commit -m "Automated Terraform Formatting"
+          git push
+          echo "Terraform file(s) has been formatted and pushed to the repository."
+
       - name: Terraform Validate
         id: validate
         uses: benyboy84/GitHubAction_terraform-validate@v1
