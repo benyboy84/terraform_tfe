@@ -183,5 +183,10 @@ variable "token_expired_at" {
 variable "members" {
   description = "(Optional) Email of the organization's members to be added."
   type        = list(string)
-  default     = []
+  default     = null
+
+  validation {
+    condition     = var.members != null ? can([for member in var.members : regex("^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})$", member)]) ? true : false : true
+    error_message = "Each member must be in a valid email address format (e.g., 'user@company.com')."
+  }
 }
