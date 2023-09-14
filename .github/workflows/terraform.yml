@@ -72,7 +72,6 @@ jobs:
           terraform_wrapper: false
 
       - name: Terraform Init
-        id: init
         run: terraform init
 
       - name: Terraform Format
@@ -83,26 +82,17 @@ jobs:
           recursive: true
           comment: true
 
-      - name: Branch name
-        run: |
-          echo GITHUB_HEAD_REF ${GITHUB_HEAD_REF}
-          echo GITHUB_BASE_REF: ${GITHUB_BASE_REF}
-          echo GITHUB_REF: ${GITHUB_REF}
-          echo GITHUB_REF_NAME: ${GITHUB_REF_NAME}
-
       - name: Git Push
         if: ${{ steps.fmt.outputs.exitcode == 3 }}
         run: |
           git config user.name "GitHub Action"
           git config user.email "notifications@github.com"
-          git branch
           git add -A
           git commit -m "Automated Terraform Formatting"
           git push -u origin ${{ steps.branch.outputs.branch }}
           echo "Terraform file(s) has been formatted and pushed to the repository."
 
       - name: Terraform Validate
-        id: validate
         uses: benyboy84/GitHubAction_terraform-validate@v1
 
       - name: Terraform Plan
