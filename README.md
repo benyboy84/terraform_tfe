@@ -7,7 +7,7 @@
 
 The following requirements are needed by this module:
 
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.3.1)
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (> 1.3.1)
 
 - <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) (0.48.0)
 
@@ -17,13 +17,7 @@ The following Modules are called:
 
 ### <a name="module_modules"></a> [modules](#module\_modules)
 
-Source: ./modules/modules
-
-Version:
-
-### <a name="module_project_teams"></a> [project\_teams](#module\_project\_teams)
-
-Source: ./modules/team
+Source: ./modules/module
 
 Version:
 
@@ -35,7 +29,7 @@ Version:
 
 ### <a name="module_workspaces"></a> [workspaces](#module\_workspaces)
 
-Source: ./modules/workspaces
+Source: ./modules/workspace
 
 Version:
 
