@@ -56,8 +56,14 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
     steps:
 
+      - name: Branch
+        id: branch
+        run: echo "branch=${GITHUB_HEAD_REF}" >> $GITHUB_OUTPUT
+
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.branch.outputs.branch }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -92,7 +98,7 @@ jobs:
           git branch
           git add -A
           git commit -m "Automated Terraform Formatting"
-          git push -u origin $GITHUB_HEAD_REF
+          git push -u origin ${{ steps.branch.outputs.branch }}
           echo "Terraform file(s) has been formatted and pushed to the repository."
 
       - name: Terraform Validate
