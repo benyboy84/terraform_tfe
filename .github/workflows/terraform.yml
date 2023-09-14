@@ -89,7 +89,7 @@ jobs:
         run: |
           git config user.name "GitHub Action"
           git config user.email "notifications@github.com"
-          git branch -b
+          git branch
           git add -A
           git commit -m "Automated Terraform Formatting"
           git push -u origin ${GITHUB_HEAD_REF}
