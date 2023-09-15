@@ -99,8 +99,8 @@ jobs:
           git push -u origin ${{ steps.branch.outputs.branch }}
           echo "Terraform file(s) has been formatted and pushed to the repository."
 
-      - name: Terraform Validate
-        uses: benyboy84/GitHubAction_terraform-validate@v1
+      # - name: Terraform Validate
+      #   uses: benyboy84/GitHubAction_terraform-validate@v1
 
       # - name: Terraform Plan
       #   id: plan
