@@ -84,6 +84,9 @@ locals {
     "Terraform Cloud" = {
       workspaces = {}
     }
+    "Test" = {
+      workspaces = {}
+    }
   }
 
 
