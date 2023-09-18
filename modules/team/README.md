@@ -198,6 +198,14 @@ Type: `string`
 
 Default: `null`
 
+### <a name="input_project_name"></a> [project\_name](#input\_project\_name)
+
+Description: (Optional) Name of the project to which the team will be added.
+
+Type: `string`
+
+Default: `null`
+
 ### <a name="input_sso_team_id"></a> [sso\_team\_id](#input\_sso\_team\_id)
 
 Description: (Optional) Unique Identifier to control team membership via SAML.

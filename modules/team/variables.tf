@@ -71,6 +71,12 @@ variable "organization_access" {
   }
 }
 
+variable "project_name" {
+  description = "(Optional) Name of the project to which the team will be added."
+  type        = string
+  default     = null
+}
+
 variable "project_id" {
   description = "(Optional) ID of the project to which the team will be added."
   type        = string
@@ -142,12 +148,12 @@ variable "custom_workspace_access" {
   }
 
   validation {
-    condition     = var.custom_workspace_access != null ? contains(["read", "update", "delete"], var.custom_workspace_access.settings) ? true : false : true
-    error_message = "Valid strings: `read`, `update`, or `delete`."
+    condition     = var.custom_workspace_access != null ? contains(["none", "read"], var.custom_workspace_access.sentinel_mocks) ? true : false : true
+    error_message = "Valid strings: `none`, or `read`."
   }
 
   validation {
-    condition     = var.custom_workspace_access != null ? contains(["none", "read-outputs", "read", "write"], var.custom_workspace_access.state-versions) ? true : false : true
+    condition     = var.custom_workspace_access != null ? contains(["none", "read-outputs", "read", "write"], var.custom_workspace_access.state_versions) ? true : false : true
     error_message = "Valid strings: `none`, `read-outputs`, `read`, or `write`."
   }
 
