@@ -8,8 +8,9 @@ rest of your modules using Terraform code (IaC).
 ## Permissions
 
 To manage the module resources, provide a user token from an account with 
-appropriate permissions. This user should belong to the "owners" team. 
-Alternatively, you can use a token from the owners team instead of a user token.
+appropriate permissions. This user should have `Manage modules` access. 
+Alternatively, you can use a token from a team with that access instead of 
+a user token.
 
 ## Authentication
 
@@ -25,7 +26,7 @@ to authenticate.
 
 ## Features
 
-- Import Terraform module into public or provate registry
+- Import Terraform module into private registry
 
 ## Usage example
 ```hcl
