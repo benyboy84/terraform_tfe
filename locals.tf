@@ -84,7 +84,9 @@ locals {
             oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
           }
           teams = {
-            workspace_access = "write"
+            "Write" = {
+              workspace_access = "write"
+            }
           }
         }
       }
