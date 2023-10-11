@@ -8,8 +8,11 @@ workspaces using Terraform code (IaC).
 ## Permissions
 
 To manage the workspace resources, provide a user token from an account with 
-appropriate permissions. This user should belong to the "owners" team of every 
-organization you wish to manage. Alternatively, you can use an organization or team token instead of a user token, but it will limit which resources you can manage. Organization and team tokens cannot manage resources across multiple organizations, and organization tokens cannot manage certain resource types (like SSH keys).
+appropriate permissions. This user should belong to the `owners` team of every 
+organization you wish to manage. Alternatively, you can use an organization or 
+team token instead of a user token, but it will limit which resources you can 
+manage. Organization and team tokens cannot manage resources across multiple 
+organizations, and organization tokens cannot manage certain resource types (like SSH keys).
 
 ## Authentication
 
