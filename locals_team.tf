@@ -33,6 +33,6 @@ locals {
   workspace_teams = { for row in local.workspace_teams_array : row.name => row }
 
   # This is to merge organization teams with project teams.
-  teams = merge(local.organization_teams, local.project_teams, local. workspace_teams)
+  teams = merge(local.organization_teams, local.project_teams, local.workspace_teams)
 
 }
