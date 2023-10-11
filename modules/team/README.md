@@ -8,7 +8,7 @@ teams using Terraform code (IaC).
 ## Permissions
 
 To manage the team resources, provide a user token from an account with 
-appropriate permissions. This user should belong to the "owners" team. 
+appropriate permissions. This user should belong to the `owners` team. 
 Alternatively, you can use a token from the owners team instead of a user token.
 
 ## Authentication
