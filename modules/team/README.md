@@ -27,9 +27,10 @@ to authenticate.
 
 - Create teams.
 - Set team's organization access.
-- Associate a team to permissions on a project.
 - Generates a new team token and overrides existing token if one exists.
 - Add or remove one or more team members.
+- Associate a team to permissions on a project.
+- Associate a team to permissions on a workspace.
 
 ## Usage example
 ```hcl
@@ -67,6 +68,7 @@ No modules.
 The following resources are used by this module:
 
 - [tfe_team.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team) (resource)
+- [tfe_team_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_access) (resource)
 - [tfe_team_organization_members.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_organization_members) (resource)
 - [tfe_team_project_access.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_project_access) (resource)
 - [tfe_team_token.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/team_token) (resource)
@@ -145,7 +147,7 @@ Description: (Optional) Email of the organization's members to be added.
 
 Type: `list(string)`
 
-Default: `[]`
+Default: `null`
 
 ### <a name="input_organization_access"></a> [organization\_access](#input\_organization\_access)
 
@@ -246,13 +248,62 @@ Type: `string`
 
 Default: `"organization"`
 
+### <a name="input_workspace_access"></a> [workspace\_access](#input\_workspace\_access)
+
+Description: (Optional) Type of fixed access to grant. Valid values are `admin`, `read`, `plan`, or `write`. To use custom permissions, use a `workspace_permission` block instead.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id)
+
+Description: (Optional) ID of the workspace to which the team will be added.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_workspace_name"></a> [workspace\_name](#input\_workspace\_name)
+
+Description: (Optional) Name of the workspace to which the team will be added.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_workspace_permission"></a> [workspace\_permission](#input\_workspace\_permission)
+
+Description:   (Optional) Settings for the team's workspace access.  
+      runs              = (Optional) The permission to grant the team on the workspace's runs. Valid values are `read`, `plan`, or `apply`.  
+      variables         = (Optional) The permission to grant the team on the workspace's variables. Valid values are `none`, `read`, or `write`.  
+      state\_versions    = (Optional) The permission to grant the team on the workspace's state versions. Valid values are `none`, `read`, `read-outputs`, or `write`.  
+      sentinel\_mocks    = (Optional) The permission to grant the team on the workspace's generated Sentinel mocks, Valid values are `none` or `read`.  
+      workspace\_locking = (Optional) Boolean determining whether or not to grant the team permission to manually lock/unlock the workspace.  
+      run\_tasks         = (Optional) Boolean determining whether or not to grant the team permission to manage workspace run tasks.
+
+Type:
+
+```hcl
+object({
+    runs              = optional(string, "read")
+    variables         = optional(string, "none")
+    state_versions    = optional(string, "none")
+    sentinel_mocks    = optional(string, "none")
+    workspace_locking = optional(bool, false)
+    run_tasks         = optional(bool, false)
+  })
+```
+
+Default: `null`
+
 ## Outputs
 
 The following outputs are exported:
 
 ### <a name="output_team"></a> [team](#output\_team)
 
-Description: Terraform Cloud team resource
+Description: Terraform Cloud team resource.
 
 ### <a name="output_team_id"></a> [team\_id](#output\_team\_id)
 
@@ -260,11 +311,19 @@ Description: The ID of the team.
 
 ### <a name="output_team_project_access"></a> [team\_project\_access](#output\_team\_project\_access)
 
-Description: Terraform Cloud team project access resource
+Description: Terraform Cloud team project access resource.
 
 ### <a name="output_team_project_access_id"></a> [team\_project\_access\_id](#output\_team\_project\_access\_id)
 
 Description: The team project access ID.
+
+### <a name="output_team_workspace_access"></a> [team\_workspace\_access](#output\_team\_workspace\_access)
+
+Description: Terraform Cloud team workspace access resource.
+
+### <a name="output_team_workspace_access_id"></a> [team\_workspace\_access\_id](#output\_team\_workspace\_access\_id)
+
+Description: The team access ID.
 
 ### <a name="output_token"></a> [token](#output\_token)
 

@@ -1,3 +1,5 @@
+# The following variables are used to create team resources (`tfe_team`).
+
 variable "name" {
   description = "(Required) Name of the team."
   type        = string
@@ -70,6 +72,46 @@ variable "organization_access" {
     error_message = "`manage_projects` requires `manage_workspaces` to be set to `true`."
   }
 }
+
+# The following variables are used to create token resources (`tfe_team_token`).
+
+variable "token" {
+  description = "(Optional) If set to `true`, a team token will be generated."
+  type        = bool
+  default     = false
+}
+
+variable "token_force_regenerate" {
+  description = "(Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!"
+  type        = bool
+  default     = false
+}
+
+variable "token_expired_at" {
+  description = "(Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire."
+  type        = string
+  default     = null
+
+  validation {
+    condition     = var.token_expired_at != null ? length(regexall("^((?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}))Z)$", var.token_expired_at)) > 0 ? true : false : true
+    error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
+  }
+}
+
+# The following variables are used to create team organization members resources (`tfe_team_organization_members`).
+
+variable "members" {
+  description = "(Optional) Email of the organization's members to be added."
+  type        = list(string)
+  default     = null
+
+  validation {
+    condition     = var.members != null ? can([for member in var.members : regex("^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})$", member)]) ? true : false : true
+    error_message = "Each member must be in a valid email address format (e.g., 'user@company.com')."
+  }
+}
+
+# The following variables are used to create team project access resources (`tfe_team_project_access`).
 
 variable "project_name" {
   description = "(Optional) Name of the project to which the team will be added."
@@ -163,36 +205,68 @@ variable "custom_workspace_access" {
   }
 }
 
-variable "token" {
-  description = "(Optional) If set to `true`, a team token will be generated."
-  type        = bool
-  default     = false
+# The following variables are used to create team workspace access resources (`tfe_team_access`).
+
+variable "workspace_name" {
+  description = "(Optional) Name of the workspace to which the team will be added."
+  type        = string
+  default     = null
 }
 
-variable "token_force_regenerate" {
-  description = "(Optional) If set to `true`, a new token will be generated even if a token already exists. This will invalidate the existing token!"
-  type        = bool
-  default     = false
+variable "workspace_id" {
+  description = "(Optional) ID of the workspace to which the team will be added."
+  type        = string
+  default     = null
 }
 
-variable "token_expired_at" {
-  description = "(Optional) The token's expiration date. The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z'). If no expiration date is supplied, the expiration date will default to null and never expire."
+variable "workspace_access" {
+  description = "(Optional) Type of fixed access to grant. Valid values are `admin`, `read`, `plan`, or `write`. To use custom permissions, use a `workspace_permission` block instead."
   type        = string
   default     = null
 
   validation {
-    condition     = var.token_expired_at != null ? length(regexall("^((?:(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2}))Z)$", var.token_expired_at)) > 0 ? true : false : true
-    error_message = "The expiration date must be a date/time string in RFC3339 format (e.g., '2024-12-31T23:59:59Z')."
+    condition     = var.workspace_access != null ? contains(["admin", "read", "plan", "write"], var.workspace_access) ? true : false : true
+    error_message = "Valid values are `admin`, `read`, `plan`, or `write`."
   }
 }
 
-variable "members" {
-  description = "(Optional) Email of the organization's members to be added."
-  type        = list(string)
-  default     = null
+variable "workspace_permission" {
+  description = <<DESCRIPTION
+  (Optional) Settings for the team's workspace access.
+      runs              = (Optional) The permission to grant the team on the workspace's runs. Valid values are `read`, `plan`, or `apply`.
+      variables         = (Optional) The permission to grant the team on the workspace's variables. Valid values are `none`, `read`, or `write`.
+      state_versions    = (Optional) The permission to grant the team on the workspace's state versions. Valid values are `none`, `read`, `read-outputs`, or `write`.
+      sentinel_mocks    = (Optional) The permission to grant the team on the workspace's generated Sentinel mocks, Valid values are `none` or `read`.
+      workspace_locking = (Optional) Boolean determining whether or not to grant the team permission to manually lock/unlock the workspace.
+      run_tasks         = (Optional) Boolean determining whether or not to grant the team permission to manage workspace run tasks.
+  DESCRIPTION
+  type = object({
+    runs              = optional(string, "read")
+    variables         = optional(string, "none")
+    state_versions    = optional(string, "none")
+    sentinel_mocks    = optional(string, "none")
+    workspace_locking = optional(bool, false)
+    run_tasks         = optional(bool, false)
+  })
+  default = null
 
   validation {
-    condition     = var.members != null ? can([for member in var.members : regex("^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})$", member)]) ? true : false : true
-    error_message = "Each member must be in a valid email address format (e.g., 'user@company.com')."
+    condition     = var.workspace_permission != null ? contains(["read", "plan", "apply"], var.workspace_permission.runs) ? true : false : true
+    error_message = "Valid strings: `read`, `plan`, or `apply`."
+  }
+
+  validation {
+    condition     = var.workspace_permission != null ? contains(["none", "read", "write"], var.workspace_permission.variables) ? true : false : true
+    error_message = "Valid strings: `none`, `read`, or `write`."
+  }
+
+  validation {
+    condition     = var.workspace_permission != null ? contains(["none", "read", "read-outputs", "write"], var.workspace_permission.state_versions) ? true : false : true
+    error_message = "Valid strings: `none`, `read`, `read-outputs`, or `write`."
+  }
+
+  validation {
+    condition     = var.workspace_permission != null ? contains(["none", "read"], var.workspace_permission.sentinel_mocks) ? true : false : true
+    error_message = "Valid strings: `none`, or `read`."
   }
 }

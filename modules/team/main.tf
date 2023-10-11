@@ -23,6 +23,29 @@ resource "tfe_team" "this" {
   }
 }
 
+resource "tfe_team_token" "this" {
+  count = var.token ? 1 : 0
+
+  team_id          = tfe_team.this.id
+  force_regenerate = var.token_force_regenerate
+  expired_at       = var.token_expired_at
+
+}
+
+data "tfe_organization_membership" "this" {
+  for_each     = var.members != null ? toset(var.members) : []
+  organization = var.organization
+  email        = each.key
+}
+
+resource "tfe_team_organization_members" "this" {
+  count   = var.members != null ? 1 : 0
+  team_id = tfe_team.this.id
+  organization_membership_ids = [
+    for member in var.members : data.tfe_organization_membership.this[member].id
+  ]
+}
+
 resource "tfe_team_project_access" "this" {
 
   count = var.project_name != null ? 1 : 0
@@ -56,25 +79,31 @@ resource "tfe_team_project_access" "this" {
 
 }
 
-resource "tfe_team_token" "this" {
-  count = var.token ? 1 : 0
+resource "tfe_team_access" "this" {
 
-  team_id          = tfe_team.this.id
-  force_regenerate = var.token_force_regenerate
-  expired_at       = var.token_expired_at
+  count = var.workspace_name != null ? 1 : 0
 
+  team_id      = tfe_team.this.id
+  access       = var.workspace_access
+  workspace_id = var.workspace_id
+
+  dynamic "permissions" {
+    for_each = var.workspace_permission != null ? [true] : []
+    content {
+      runs              = var.workspace_permission.runs
+      variables         = var.workspace_permission.variables
+      state_versions    = var.workspace_permission.state_versions
+      sentinel_mocks    = var.workspace_permission.sentinel_mocks
+      workspace_locking = var.workspace_permission.workspace_locking
+      run_tasks         = var.workspace_permission.run_tasks
+    }
+  }
+
+  lifecycle {
+    precondition {
+      condition     = var.workspace_permission != null ? var.workspace_access != null ? false : true : true
+      error_message = "`workspace_permission` value must not be provided if access is provided."
+    }
+  }
 }
 
-data "tfe_organization_membership" "this" {
-  for_each     = var.members != null ? toset(var.members) : []
-  organization = var.organization
-  email        = each.key
-}
-
-resource "tfe_team_organization_members" "this" {
-  count   = var.members != null ? 1 : 0
-  team_id = tfe_team.this.id
-  organization_membership_ids = [
-    for member in var.members : data.tfe_organization_membership.this[member].id
-  ]
-}
