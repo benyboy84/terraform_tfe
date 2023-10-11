@@ -1,8 +1,8 @@
 locals {
-  # The local is used to define the organization name.
+  # This local is used to define the organization name.
   organization_name = "ConseilsTI"
 
-  # The local aisre used to define teams at the organization level.
+  # This local is used to define teams at the organization level.
   organization_teams = {
     # `organization_teams` is a map of object where the key is the name of the team.
     # Each object must contain an `organization_access` argument with the 
@@ -43,8 +43,31 @@ locals {
     }
   }
 
-  # The following local is used to define the projects and workspaces with their required
+  # This local is used to define the projects and workspaces with their required
   # teams and access.
+  # Each project can contain a `workspaces` argument with their properties.
+  # Each workspace can contain a `teams` with their workspace access.
+  # Each project can contain a `teams` with their project access.
+  # Refer to 
+  # Refer to 
+  # Refer to "./modules/team/README.md" for more details on the team's permissions type.
+  # project_name = {
+  #   workspaces = {
+  #     vcs_repo = {
+  #       identifier     = "organization/repository"
+  #       oauth_token_id = "token_id"
+  #     }
+  #     teams = {
+  #       "team_name" = {
+  #         workspace_access = "access"
+  #       }
+  #     } 
+  #   }
+  #   teams = {
+  #     "team_name" = {
+  #       project_access = "access"
+  #     }
+  # }
   projects = {
     "Azure Landing Zone" = {
       workspaces = {
@@ -59,6 +82,9 @@ locals {
           vcs_repo = {
             identifier     = "benyboy84/azure-tf-application-finance"
             oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
+          }
+          teams = {
+            workspace_access = "write"
           }
         }
       }
@@ -78,6 +104,13 @@ locals {
           members        = ["benoit.blais@conseilsti.ca"]
           project_access = "admin"
           token          = true
+        }
+        "Custom" = {
+          project_access = "custom"
+          custom_workspace_access = {
+            runs = "apply"
+          }
+          token = true
         }
       }
     }
