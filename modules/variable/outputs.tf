@@ -25,20 +25,20 @@ output "variable_set" {
 
 output "workspace_variable_set_attachment_id" {
   description = "The ID of the variable set attachment. ID format: `<workspace-id>_<variable-set-id>`"
-  value       = var.workspace_name != null ? tfe_workspace_variable_set.this[0].id : null
+  value       = var.variable_set_workspace_name != null ? tfe_workspace_variable_set.this[0].id : null
 }
 
 output "workspace_variable_set_attachment" {
   description = "Terraform Cloud workspace_variable_set resource."
-  value       = var.workspace_name != null ? tfe_workspace_variable_set.this[0] : null
+  value       = var.variable_set_workspace_name != null ? tfe_workspace_variable_set.this[0] : null
 }
 
 output "project_variable_set_attachment_id" {
   description = "The ID of the variable set attachment. ID format: `<project-id>_<variable-set-id>`"
-  value       = var.project_name != null ? tfe_project_variable_set.this[0].id : null
+  value       = var.variable_set_project_name != null ? tfe_project_variable_set.this[0].id : null
 }
 
 output "project_variable_set_attachment" {
   description = "Terraform Cloud project_variable_set resource."
-  value       = var.project_name != null ? tfe_project_variable_set.this[0] : null
+  value       = var.variable_set_project_name != null ? tfe_project_variable_set.this[0] : null
 }
