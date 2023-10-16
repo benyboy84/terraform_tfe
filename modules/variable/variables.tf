@@ -13,7 +13,7 @@ variable "category" {
   type        = string
 
   validation {
-    condition     = contains(["terraform", "env", "agent"], var.category) ? true : false
+    condition     = contains(["terraform", "env"], var.category) ? true : false
     error_message = "Valid values are `terraform` or `env`."
   }
 }
