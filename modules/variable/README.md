@@ -86,27 +86,9 @@ Description: (Required) Name of the variable.
 
 Type: `string`
 
-### <a name="input_project_id"></a> [project\_id](#input\_project\_id)
-
-Description: (Optional) Project ID to add the variable set to.
-
-Type: `string`
-
 ### <a name="input_value"></a> [value](#input\_value)
 
 Description: (Required) Value of the variable.
-
-Type: `string`
-
-### <a name="input_variable_set_id"></a> [variable\_set\_id](#input\_variable\_set\_id)
-
-Description: (Optional) Name of the variable set to add.
-
-Type: `string`
-
-### <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id)
-
-Description: (Optional) Workspace ID to add the variable set to.
 
 Type: `string`
 
@@ -133,14 +115,6 @@ Default: `false`
 ### <a name="input_organization"></a> [organization](#input\_organization)
 
 Description: (Optional) Name of the organization. If omitted, organization must be defined in the provider config.
-
-Type: `string`
-
-Default: `null`
-
-### <a name="input_project_name"></a> [project\_name](#input\_project\_name)
-
-Description: (Optional) Project name to add the variable set to.
 
 Type: `string`
 
@@ -178,9 +152,41 @@ Type: `string`
 
 Default: `null`
 
-### <a name="input_workspace_name"></a> [workspace\_name](#input\_workspace\_name)
+### <a name="input_variable_set_project_id"></a> [variable\_set\_project\_id](#input\_variable\_set\_project\_id)
+
+Description: (Optional) Project ID to add the variable set to.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_variable_set_project_name"></a> [variable\_set\_project\_name](#input\_variable\_set\_project\_name)
+
+Description: (Optional) Project name to add the variable set to.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_variable_set_workspace_id"></a> [variable\_set\_workspace\_id](#input\_variable\_set\_workspace\_id)
+
+Description: (Optional) Workspace ID to add the variable set to.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_variable_set_workspace_name"></a> [variable\_set\_workspace\_name](#input\_variable\_set\_workspace\_name)
 
 Description: (Optional) Workspace name to add the variable set to.
+
+Type: `string`
+
+Default: `null`
+
+### <a name="input_workspace_id"></a> [workspace\_id](#input\_workspace\_id)
+
+Description: (Optional) ID of the workspace that owns the variable.
 
 Type: `string`
 

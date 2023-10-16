@@ -67,24 +67,26 @@ variable "organization" {
   default     = null
 }
 
-variable "workspace_name" {
+variable "variable_set_workspace_name" {
   description = "(Optional) Workspace name to add the variable set to."
   type        = string
   default     = null
 }
 
-variable "workspace_id" {
+variable "variable_set_workspace_id" {
   description = "(Optional) Workspace ID to add the variable set to."
   type        = string
+  default     = null
 }
 
-variable "project_name" {
+variable "variable_set_project_name" {
   description = "(Optional) Project name to add the variable set to."
   type        = string
   default     = null
 }
 
-variable "project_id" {
+variable "variable_set_project_id" {
   description = "(Optional) Project ID to add the variable set to."
   type        = string
+  default     = null
 }

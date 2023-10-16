@@ -26,15 +26,15 @@ resource "tfe_variable_set" "this" {
 }
 
 resource "tfe_workspace_variable_set" "this" {
-  count = var.workspace_name != null && var.variable_set_name != null ? 1 : 0
+  count = var.variable_set_workspace_name != null && var.variable_set_name != null ? 1 : 0
 
   variable_set_id = tfe_variable_set.this[0].id
-  workspace_id    = var.workspace_id
+  workspace_id    = var.variable_set_workspace_id
 }
 
 resource "tfe_project_variable_set" "this" {
-  count = var.project_name != null && var.variable_set_name != null ? 1 : 0
+  count = var.variable_set_project_name != null && var.variable_set_name != null ? 1 : 0
 
   variable_set_id = tfe_variable_set.this[0].id
-  project_id      = var.project_id
+  project_id      = var.variable_set_project_id
 }
