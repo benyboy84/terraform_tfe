@@ -43,12 +43,6 @@ variable "workspace_id" {
   default     = null
 }
 
-variable "variable_set_id" {
-  description = "(Optional) ID of the variable set that owns the variable."
-  type        = string
-  default     = null
-}
-
 variable "variable_set_name" {
   description = "(Optional) Name of the variable set."
   type        = string
@@ -73,11 +67,6 @@ variable "organization" {
   default     = null
 }
 
-variable "variable_set_id" {
-  description = "(Optional) The variable set ID."
-  type        = string
-}
-
 variable "workspace_name" {
   description = "(Optional) Workspace name to add the variable set to."
   type        = string
@@ -86,11 +75,6 @@ variable "workspace_name" {
 
 variable "workspace_id" {
   description = "(Optional) Workspace ID to add the variable set to."
-  type        = string
-}
-
-variable "variable_set_id" {
-  description = "(Optional) Name of the variable set to add."
   type        = string
 }
 

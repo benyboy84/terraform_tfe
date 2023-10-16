@@ -6,12 +6,12 @@ resource "tfe_variable" "this" {
   hcl             = var.hcl
   sensitive       = var.sensitive
   workspace_id    = var.workspace_id
-  variable_set_id = var.variable_set_id
+  variable_set_id = try(tfe_variable_set.this.id, null)
 
   lifecycle {
     precondition {
-      condition     = var.workspace_id != null && var.variable_set_id != null || var.workspace_id == null && var.variable_set_id == null ? false : true
-      error_message = "`workspace_id` or `variable_set_id` variable must be provided."
+      condition     = var.workspace_id != null && var.variable_set_name != null || var.workspace_id == null && var.variable_set_name == null ? false : true
+      error_message = "`workspace_id` or `variable_set_name` variable must be provided."
     }
   }
 }
