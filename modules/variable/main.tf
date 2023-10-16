@@ -6,7 +6,7 @@ resource "tfe_variable" "this" {
   hcl             = var.hcl
   sensitive       = var.sensitive
   workspace_id    = var.workspace_id
-  variable_set_id = try(tfe_variable_set.this.id, null)
+  variable_set_id = try(tfe_variable_set.this[0].id, null)
 
   lifecycle {
     precondition {
@@ -26,15 +26,15 @@ resource "tfe_variable_set" "this" {
 }
 
 resource "tfe_workspace_variable_set" "this" {
-  count = var.workspace_name != null ? 1 : 0
+  count = var.workspace_name != null && var.variable_set_name != null ? 1 : 0
 
-  variable_set_id = var.variable_set_id
+  variable_set_id = tfe_variable_set.this[0].id
   workspace_id    = var.workspace_id
 }
 
 resource "tfe_project_variable_set" "this" {
-  count = var.project_name != null ? 1 : 0
+  count = var.project_name != null && var.variable_set_name != null ? 1 : 0
 
-  variable_set_id = var.variable_set_id
+  variable_set_id = tfe_variable_set.this[0].id
   project_id      = var.project_id
 }
