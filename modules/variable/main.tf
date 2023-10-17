@@ -23,6 +23,13 @@ resource "tfe_variable_set" "this" {
   description  = var.variable_set_description
   global       = var.global
   organization = var.organization
+
+  lifecycle {
+    precondition {
+      condition     = var.global && var.variable_set_workspace_name == null && var.variable_set_project_name == null ? true : false
+      error_message = "`global` cannot be set to true if `variable_set_workspace_name` or `variable_set_project_name` is defined."
+    }
+  }
 }
 
 resource "tfe_workspace_variable_set" "this" {
