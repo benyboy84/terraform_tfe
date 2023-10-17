@@ -36,7 +36,6 @@ variable "sensitive" {
   default     = false
 }
 
-#One of the following (Required)
 variable "workspace_id" {
   description = "(Optional) ID of the workspace that owns the variable."
   type        = string
@@ -69,24 +68,12 @@ variable "organization" {
 
 variable "variable_set_workspace_name" {
   description = "(Optional) Workspace name to add the variable set to."
-  type        = string
-  default     = null
-}
-
-variable "variable_set_workspace_id" {
-  description = "(Optional) Workspace ID to add the variable set to."
-  type        = string
+  type        = list(string)
   default     = null
 }
 
 variable "variable_set_project_name" {
   description = "(Optional) Project name to add the variable set to."
-  type        = string
-  default     = null
-}
-
-variable "variable_set_project_id" {
-  description = "(Optional) Project ID to add the variable set to."
-  type        = string
+  type        = list(string)
   default     = null
 }

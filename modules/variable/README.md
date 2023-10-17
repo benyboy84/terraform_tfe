@@ -35,12 +35,13 @@ to authenticate.
 module "team" {
   source = "./modules/variable"
 
-  name           = "Team Name"
-  organization   = "Organization Name"
-  members        = ["user@company.com"]
-  project_id     = "Project_Id"
-  project_access = "write"
-  token          = true
+  key                       = "Variable"
+  value                     = "Value"
+  category                  = "env"
+  sensitive                 = true
+  variable_set_name         = "Variable_set Name"
+  organization              = "Organization Name"
+  variable_set_project_name = ["Project Name"]
 }
 ```
 
@@ -69,6 +70,8 @@ The following resources are used by this module:
 - [tfe_variable.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/variable) (resource)
 - [tfe_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/variable_set) (resource)
 - [tfe_workspace_variable_set.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/resources/workspace_variable_set) (resource)
+- [tfe_project.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/project) (data source)
+- [tfe_workspace.this](https://registry.terraform.io/providers/hashicorp/tfe/0.48.0/docs/data-sources/workspace) (data source)
 
 ## Required Inputs
 
@@ -152,27 +155,11 @@ Type: `string`
 
 Default: `null`
 
-### <a name="input_variable_set_project_id"></a> [variable\_set\_project\_id](#input\_variable\_set\_project\_id)
-
-Description: (Optional) Project ID to add the variable set to.
-
-Type: `string`
-
-Default: `null`
-
 ### <a name="input_variable_set_project_name"></a> [variable\_set\_project\_name](#input\_variable\_set\_project\_name)
 
 Description: (Optional) Project name to add the variable set to.
 
-Type: `string`
-
-Default: `null`
-
-### <a name="input_variable_set_workspace_id"></a> [variable\_set\_workspace\_id](#input\_variable\_set\_workspace\_id)
-
-Description: (Optional) Workspace ID to add the variable set to.
-
-Type: `string`
+Type: `list(string)`
 
 Default: `null`
 
@@ -180,7 +167,7 @@ Default: `null`
 
 Description: (Optional) Workspace name to add the variable set to.
 
-Type: `string`
+Type: `list(string)`
 
 Default: `null`
 
