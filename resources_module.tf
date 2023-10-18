@@ -13,5 +13,3 @@ module "modules" {
   vcs_repo        = try(each.value.vcs_repo, null)
 
 }
-
-
