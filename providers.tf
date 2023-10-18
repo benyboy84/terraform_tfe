@@ -1,3 +1,1 @@
-provider "tfe" {
-  # Configuration options
-}
+provider "tfe" {}

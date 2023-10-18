@@ -8,14 +8,4 @@ terraform {
     }
   }
 
-  cloud {
-    organization = "ConseilsTI"
-
-    workspaces {
-      name = "terraform_tfe"
-    }
-  }
-
-  required_version = "> 1.3.1"
-
 }
